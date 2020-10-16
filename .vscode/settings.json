@@ -1,0 +1,17 @@
+{
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "html.format.endWithNewline": true,
+    "html.format.indentInnerHtml": true,
+    "javascript.format.semicolons": "remove",
+    "typescript.format.semicolons": "remove",
+    "files.exclude": {
+        ".vscode": true,
+        "htdocs": true,
+        "*/htdocs": true,
+        "node_modules": true
+    },
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2
+}

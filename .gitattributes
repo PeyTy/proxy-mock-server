@@ -1,0 +1,15 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+*.ttf binary
+*.webp binary
+*.exe binary
+*.dll binary
+*.img binary
+*.zip binary
+*.jpg binary
+*.ico binary
+*.bmp binary
+*.png binary
+*.gif binary
+*.ani binary
+*.cur binary

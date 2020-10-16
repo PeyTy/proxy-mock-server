@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { IApi, IProject } from '../store'
+import { IApi, IProject, IApiResponse } from '../store'
 import { observer } from 'mobx-react'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -77,7 +77,7 @@ export default observer((props: { pattern: string; project: IProject }) => {
 
   const responseEditor = (): React.ReactNode => {
     const responseJson = path[state.route].responses[state.response]
-    const responseApi = api.methods[state.route].responses[state.response]
+    const responseApi: IApiResponse = api.methods[state.route].responses[state.response]
     const headers = responseJson.headers ? ownKeys(responseJson.headers) : []
 
     const getSchema = (response: SwaggerPathResponse): string => {

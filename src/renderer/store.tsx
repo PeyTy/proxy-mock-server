@@ -211,9 +211,6 @@ export class IProject {
     this.https = project.https == null ? false : project.https
     this.storage = ((project.storage == null) || (project.storage === '')) ? path.join(whereDir, project.uuid) : project.storage
 
-    // Upgrade APIs
-    this.fillApis()
-
     let dir = this.storage
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true })
@@ -233,6 +230,9 @@ export class IProject {
     if (fs.existsSync(swag)) {
       this.swaggerJson = JSON.parse(fs.readFileSync(swag).toString())
     }
+
+    // Upgrade APIs
+    this.fillApis()
 
     if (project.routes) {
       for (const route of project.routes) {

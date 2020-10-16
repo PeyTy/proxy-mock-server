@@ -1,6 +1,6 @@
 # proxy-mock-server
 
-> An electron-mock server & tunneling proxy
+> An electron-based mock server & tunneling proxy
 
 #### Build Setup
 
@@ -13,7 +13,8 @@ npm run dev
 
 # build electron application for production
 npm run build
-
-# lint all files in `src/`
-npm run lint
 ```
+
+## MIT License
+
+Commercial & inhouse-forking friendly.

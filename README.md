@@ -8,11 +8,12 @@
 # install dependencies
 yarn install
 
-# serve with hot reload at localhost:9080
+# start app with hot reload & developer tools
 npm run dev
 
 # build electron application for production
 npm run build
+# you will find installers at proxy-mock-server\build & portable at proxy-mock-server\build\win-unpacked
 ```
 
 ## MIT License

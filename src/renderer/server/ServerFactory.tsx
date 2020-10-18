@@ -206,7 +206,7 @@ export default class {
 
     const headers: http.OutgoingHttpHeaders = {
       Cookie: cookies,
-      'User-Agent': (req.headers || {})['User-Agent'] || (req.headers || {})['user-agent'],
+      'User-Agent': (req.headers || {})['User-Agent'] || (req.headers || {})['user-agent'] || config.defaultUserAgent,
       'Access-Control-Allow-Origin': '*',
       Connection: 'keep-alive'
     }

@@ -7,9 +7,11 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import * as fs from 'fs'
 import { remote } from 'electron'
+import { parse } from 'url'
 import https from 'https'
 import http from 'http'
 import { ownKeys } from '../utils'
+import * as config from '../utils/constants'
 
 const { dialog } = remote
 
@@ -42,7 +44,9 @@ export default observer((props: { project: IProject }) => {
     const backup = project.swaggerJson
 
     try {
-      project.swaggerJson = JSON.parse(json)
+      const payload = JSON.parse(json)
+      payload.paths = payload.paths || {}
+      project.swaggerJson = payload
       project.fillApis()
       project.saveSwagger()
     } catch (e) {
@@ -56,19 +60,22 @@ export default observer((props: { project: IProject }) => {
 
   const handleImportUrl = (): void => {
     const url = state.remote
+    const parsed = parse(url)
     const isHTTPS = url.includes('https:')
     const subs = url
       .replace('https://', '')
       .replace('http://', '')
       .split('/')
-    const hostname = subs.shift()
 
     const protocol = isHTTPS ? https : http
     const options = {
-      hostname: hostname,
-      port: isHTTPS ? 443 : 80,
+      hostname: parsed.hostname,
+      port: parseInt(parsed.port || (isHTTPS ? '443' : '80')),
       path: '/' + subs.join('/'),
-      method: 'GET'
+      method: 'GET',
+      headers: {
+        'User-Agent': config.defaultUserAgent
+      }
     }
 
     const req = protocol.request(options, res => {

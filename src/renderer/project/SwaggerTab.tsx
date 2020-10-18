@@ -66,6 +66,7 @@ export default observer((props: { project: IProject }) => {
       .replace('https://', '')
       .replace('http://', '')
       .split('/')
+    subs.shift()
 
     const protocol = isHTTPS ? https : http
     const options = {

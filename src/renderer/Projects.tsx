@@ -9,6 +9,7 @@ import { ProjectsGrid } from './ProjectsGrid'
 import { Store } from './store'
 import { remote } from 'electron'
 import * as path from 'path'
+import alert from './utils/alert'
 
 const { dialog } = remote
 

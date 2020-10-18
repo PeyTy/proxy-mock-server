@@ -7,6 +7,7 @@ import ServerFactory from './server/ServerFactory'
 import { ownKeys } from './utils'
 import { Swagger, SwaggerPath, SwaggerPathMethod, SwaggerPathResponse, SwaggerPathResponseHeader, SwaggerDefinitions, SwaggerDefinition } from './utils/Swagger'
 const { app } = remote
+import alert from './utils/alert'
 
 export class IRoute {
   @observable input = '/rest/'

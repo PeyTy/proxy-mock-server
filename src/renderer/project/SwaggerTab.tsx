@@ -12,6 +12,7 @@ import https from 'https'
 import http from 'http'
 import { ownKeys } from '../utils'
 import * as config from '../utils/constants'
+import alert from '../utils/alert'
 
 const { dialog } = remote
 

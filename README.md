@@ -2,6 +2,8 @@
 
 > An electron-based mock server & tunneling proxy
 
+[![proxy-mock-server](mocker.png?raw=true)](https://github.com/PeyTy/proxy-mock-server)
+
 #### Build Setup
 
 ``` bash

@@ -4,6 +4,10 @@
 
 [![proxy-mock-server](mocker.png?raw=true)](https://github.com/PeyTy/proxy-mock-server)
 
+### YouTube
+
+- [Демонстрация proxy-mock-server 1.0.0](https://youtu.be/Hb78LMeYqns)
+
 #### Build Setup
 
 ``` bash

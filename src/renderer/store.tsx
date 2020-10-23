@@ -8,6 +8,7 @@ import { ownKeys } from './utils'
 import { Swagger, SwaggerPath, SwaggerPathMethod, SwaggerPathResponse, SwaggerPathResponseHeader, SwaggerDefinitions, SwaggerDefinition } from './utils/Swagger'
 const { app } = remote
 import alert from './utils/alert'
+import confirm from './utils/confirm'
 
 export class IRoute {
   @observable input = '/rest/'
@@ -362,6 +363,28 @@ export class Store {
 
   @action.bound createProject(title: string, storage: string): void {
     if (this.existsProject(title)) return
+
+    if (storage) {
+      const mockData = path.join(storage, 'mock-project.json')
+      if (fs.existsSync(mockData)) {
+        if (confirm('Found existing project there. Proceed with import?')) {
+          this.importProject(storage) // Note storage
+          return
+        } else {
+          return
+        }
+      }
+
+      const mockRepo = path.join(storage, 'mock-data', 'mock-project.json')
+      if (fs.existsSync(mockRepo)) {
+        if (confirm('Found existing project there. Proceed with import?')) {
+          this.importProject(path.join(storage, 'mock-data')) // Note storage/mock-data
+          return
+        } else {
+          return
+        }
+      }
+    }
 
     // Let's create sub folder for mocker
     if (storage) {

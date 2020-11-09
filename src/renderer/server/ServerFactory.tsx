@@ -8,6 +8,8 @@ import { IFile, IProject } from '../store'
 import { observable } from 'mobx'
 import { ownKeys } from '../utils'
 import * as config from '../utils/constants'
+import { isMethodWithBody } from '../utils/network'
+import { replacers } from '../utils/faker'
 
 export interface LogRecord {
   meta: string
@@ -190,10 +192,6 @@ export default class {
     }
   }
 
-  isMethodWithBody = (method: string | undefined): boolean => {
-    return method !== 'GET' && method !== 'DELETE'
-  }
-
   tunnelRequest = (project: IProject, req: IncomingMessage, res: ServerResponse, filePath: string, fallback404: (() => void) | null): void => {
     const agent = new http.Agent({
       keepAlive: true,
@@ -220,7 +218,7 @@ export default class {
       headers: headers
     }
 
-    if (this.isMethodWithBody(req.method)) {
+    if (isMethodWithBody(req.method)) {
       headers['Content-Length'] = req.headers['content-length'] || req.headers['Content-Length']
       headers['Content-Type'] = req.headers['content-type'] || req.headers['Content-Type']
     }
@@ -291,7 +289,7 @@ export default class {
 
     const _req = (project.https ? https : http).request(options, callback)
 
-    if (this.isMethodWithBody(req.method)) {
+    if (isMethodWithBody(req.method)) {
       req.on('data', (chunk: Buffer) => {
         buffers.push(chunk)
       })
@@ -378,6 +376,13 @@ export default class {
         code = 500
       }
     }
+
+    // faker
+    ownKeys(replacers).map(pathKey => {
+      const replacer: () => string = (replacers as any)[pathKey]
+      const pattern = '{{' + pathKey + '}}'
+      while (content.includes(pattern)) content = content.replace(pattern, replacer())
+    })
 
     this.log(project, 'MOCK [' + code + ']', pattern)
     res.writeHead(code, head)

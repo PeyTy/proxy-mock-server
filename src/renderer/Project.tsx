@@ -256,7 +256,7 @@ export default observer((props: Props) => {
             <ListItemText primary={'Log'} />
           </ListItem>
 
-          <ListItem button key={'Swagger'} onClick={(): void => route('swagger')} selected={store.subroute === 'swagger'}>
+          <ListItem button key={'Swagger'} title="Also known as OpenAPI" onClick={(): void => route('swagger')} selected={store.subroute === 'swagger'}>
             <ListItemIcon><InboxIcon /></ListItemIcon>
             <ListItemText primary={'Swagger'} />
           </ListItem>

@@ -6,9 +6,9 @@ import { remote } from 'electron'
 import ServerFactory from './server/ServerFactory'
 import { ownKeys } from './utils'
 import { Swagger, SwaggerPath, SwaggerPathMethod, SwaggerPathResponse, SwaggerPathResponseHeader, SwaggerDefinitions, SwaggerDefinition } from './utils/Swagger'
-const { app } = remote
 import alert from './utils/alert'
 import confirm from './utils/confirm'
+const { app } = remote
 
 export class IRoute {
   @observable input = '/rest/'
@@ -311,6 +311,7 @@ export class Store {
   @observable deleteProjectModal: IProject | null = null
   @observable currentProject: IProject = null as unknown as IProject
   @observable serverFactory!: ServerFactory
+  @observable prefersDarkMode = true
 
   constructor() {
     // Upgrade 1.0.0 -> 1.1.0

@@ -29,6 +29,16 @@ npm run build
 # you will find installers at proxy-mock-server\build & portable at proxy-mock-server\build\win-unpacked
 ```
 
+### Install Globally
+
+``` bash
+# install
+npm i -g proxy-mock-server
+
+# run as
+proxy-mock-server
+```
+
 ## MIT License
 
 Commercial & inhouse-forking friendly.

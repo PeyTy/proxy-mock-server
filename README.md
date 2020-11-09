@@ -15,6 +15,10 @@
 - Save projects in independent repos, manage with single app
 - Use faker like `{{firstName}}` in JSON responses
 
+### YouTube
+
+- [Демонстрация proxy-mock-server 1.0.0](https://youtu.be/Hb78LMeYqns)
+
 #### Build Setup
 
 ``` bash

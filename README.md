@@ -2,7 +2,7 @@
 
 > An electron-based mock server & tunneling proxy
 
-[![proxy-mock-server](mocker.png?raw=true)](https://github.com/PeyTy/proxy-mock-server)
+[![proxy-mock-server](https://github.com/PeyTy/proxy-mock-server/raw/main/mocker.png?raw=true)](https://github.com/PeyTy/proxy-mock-server)
 
 #### Features
 

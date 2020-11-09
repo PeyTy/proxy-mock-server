@@ -71,60 +71,65 @@ export default observer((props: { project: IProject }) => {
   }
 
   return <>
-    {project.routes.map((route) => <div key={route.uuid}>
-      <TextField
-        autoFocus
-        margin="dense"
-        id="name"
-        label="Input route global regular expression"
-        type="text"
-        fullWidth
-        defaultValue={route.input}
-        onChange={(event): void => handleChangeInput(route, event.target.value.trim())}
-        error={!isValid(route.input)}
-      />
-      <TextField
-        margin="dense"
-        id="name"
-        label="Replacing pattern"
-        type="text"
-        fullWidth
-        defaultValue={route.replace}
-        onChange={(event): void => handleChangeReplace(route, event.target.value.trim())}
-        error={!isValidReplace(route.replace)}
-      />
-      <TextField
-        margin="dense"
-        id="name"
-        label="Testing url"
-        type="text"
-        fullWidth
-        defaultValue={route.demo}
-        onChange={(event): void => handleChangeDemo(route, event.target.value.trim())}
-        error={false}
-      />
-      <TextField
-        margin="dense"
-        id="name"
-        label="Resulting url"
-        type="text"
-        fullWidth
-        disabled
-        value={testDemo(route)}
-        onChange={(): void => {
-          // Nothing
-        }}
-        error={false}
-      />
-      <div>
-        <FormControlLabel
-          control={<Checkbox checked={route.enabled !== false} onChange={(): void => handleChangeEnabled(route)} name="enabled" />}
-          label="Enable"
+    {project.routes.map((route) => {
+      const enabled = route.enabled !== false
+
+      return <div key={route.uuid}>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="name"
+          label="Input route global regular expression"
+          type="text"
+          fullWidth
+          defaultValue={route.input}
+          onChange={(event): void => handleChangeInput(route, event.target.value.trim())}
+          error={!isValid(route.input)}
+          disabled={!enabled}
         />
-        <Button variant="contained" color="primary" onClick={(): void => removeRoute(route)}>Remove route</Button>
+        {enabled && <TextField
+          margin="dense"
+          id="name"
+          label="Replacing pattern"
+          type="text"
+          fullWidth
+          defaultValue={route.replace}
+          onChange={(event): void => handleChangeReplace(route, event.target.value.trim())}
+          error={!isValidReplace(route.replace)}
+        />}
+        {enabled && <TextField
+          margin="dense"
+          id="name"
+          label="Testing url"
+          type="text"
+          fullWidth
+          defaultValue={route.demo}
+          onChange={(event): void => handleChangeDemo(route, event.target.value.trim())}
+          error={false}
+        />}
+        {enabled && <TextField
+          margin="dense"
+          id="name"
+          label="Resulting url"
+          type="text"
+          fullWidth
+          disabled
+          value={testDemo(route)}
+          onChange={(): void => {
+            // Nothing
+          }}
+          error={false}
+        />}
+        <div>
+          <FormControlLabel
+            control={<Checkbox checked={enabled} onChange={(): void => handleChangeEnabled(route)} name="enabled" />}
+            label="Enable"
+          />
+          <Button variant="contained" color="primary" onClick={(): void => removeRoute(route)}>Remove route</Button>
+        </div>
+        <hr></hr>
       </div>
-      <hr></hr>
-    </div>)}
+    })}
     <div>
       <Button variant="contained" color="primary" onClick={addRoute}>Add route</Button>
     </div>

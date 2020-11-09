@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 'use strict'
 
 const chalk = require('chalk')
@@ -71,7 +72,7 @@ function startRenderer() {
 
     const server = new WebpackDevServer(compiler, {
       contentBase: path.join(__dirname, '../'),
-      hot:true,
+      hot: true,
       quiet: true,
       before(app, ctx) {
         app.use(hotMiddleware)
@@ -156,10 +157,10 @@ function electronLog(data, color) {
   if (/[0-9A-z]+/.test(log)) {
     console.log(
       chalk[color].bold('┏ Electron -------------------') +
-        '\n\n' +
-        log +
-        chalk[color].bold('┗ ----------------------------') +
-        '\n'
+      '\n\n' +
+      log +
+      chalk[color].bold('┗ ----------------------------') +
+      '\n'
     )
   }
 }

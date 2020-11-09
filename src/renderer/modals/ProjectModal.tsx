@@ -46,7 +46,7 @@ export const ProjectModal = observer((props: { store: Store }) => {
     props.store.newProjectStorage = event.target.value.trim()
   }
 
-  const importFolder = (): void => {
+  const selectFolder = (): void => {
     dialog.showOpenDialog({
       properties: ['openDirectory']
     }).then(files => {
@@ -91,7 +91,7 @@ export const ProjectModal = observer((props: { store: Store }) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={importFolder} color="primary">
+          <Button onClick={selectFolder} color="primary">
             Select Folder
           </Button>
           <Button onClick={handleClose} color="primary">

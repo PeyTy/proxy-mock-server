@@ -30,4 +30,4 @@ export const defaultHeaders = {
   'Cache-Control': 'no-store'
 }
 
-export const defaultUserAgent: string = 'Mozilla/5.0 (Linux x86_64; rv:81.0) Gecko/20100101 Firefox/81.0'
+export const defaultUserAgent = 'Mozilla/5.0 (Linux x86_64; rv:81.0) Gecko/20100101 Firefox/81.0'

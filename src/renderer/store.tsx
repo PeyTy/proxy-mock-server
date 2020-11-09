@@ -6,8 +6,9 @@ import { remote } from 'electron'
 import ServerFactory from './server/ServerFactory'
 import { ownKeys } from './utils'
 import { Swagger, SwaggerPath, SwaggerPathMethod, SwaggerPathResponse, SwaggerPathResponseHeader, SwaggerDefinitions, SwaggerDefinition } from './utils/Swagger'
-const { app } = remote
 import alert from './utils/alert'
+import confirm from './utils/confirm'
+const { app } = remote
 
 export class IRoute {
   @observable input = '/rest/'
@@ -310,6 +311,7 @@ export class Store {
   @observable deleteProjectModal: IProject | null = null
   @observable currentProject: IProject = null as unknown as IProject
   @observable serverFactory!: ServerFactory
+  @observable prefersDarkMode = true
 
   constructor() {
     // Upgrade 1.0.0 -> 1.1.0
@@ -362,6 +364,28 @@ export class Store {
 
   @action.bound createProject(title: string, storage: string): void {
     if (this.existsProject(title)) return
+
+    if (storage) {
+      const mockData = path.join(storage, 'mock-project.json')
+      if (fs.existsSync(mockData)) {
+        if (confirm('Found existing project there. Proceed with import?')) {
+          this.importProject(storage) // Note storage
+          return
+        } else {
+          return
+        }
+      }
+
+      const mockRepo = path.join(storage, 'mock-data', 'mock-project.json')
+      if (fs.existsSync(mockRepo)) {
+        if (confirm('Found existing project there. Proceed with import?')) {
+          this.importProject(path.join(storage, 'mock-data')) // Note storage/mock-data
+          return
+        } else {
+          return
+        }
+      }
+    }
 
     // Let's create sub folder for mocker
     if (storage) {

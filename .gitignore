@@ -4,6 +4,11 @@
 # dependencies
 node_modules
 
+# idea
+.idea
+*.iws
+.idea_modules
+
 # builds
 build
 dist

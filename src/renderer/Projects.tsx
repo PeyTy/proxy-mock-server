@@ -1,3 +1,25 @@
+// MIT License
+//
+// Copyright(c) 2020 Miraculous Ladybugreport
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files(the "Software"), to deal
+//   in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and / or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
 import React from 'react'
 import Button from '@material-ui/core/Button'
 import AppBar from '@material-ui/core/AppBar'
@@ -10,6 +32,8 @@ import { Store } from './store'
 import { remote } from 'electron'
 import * as path from 'path'
 import alert from './utils/alert'
+import Brightness7Icon from '@material-ui/icons/Brightness7'
+import Brightness4Icon from '@material-ui/icons/Brightness4'
 
 const { dialog } = remote
 
@@ -41,6 +65,8 @@ export const Projects = observer((props: { store: Store }) => {
     })
   }
 
+  const { prefersDarkMode } = props.store
+
   return (
     <>
       <AppBar color="primary" position="static">
@@ -61,6 +87,19 @@ export const Projects = observer((props: { store: Store }) => {
           <Button variant="contained" color="secondary" onClick={importProject} title='Import mock-project.json'>
             Import project
           </Button>
+           &nbsp;
+           &nbsp;
+           &nbsp;
+          {prefersDarkMode
+            ? <Brightness4Icon style={{
+              cursor: 'pointer'
+            }} onClick={() => props.store.prefersDarkMode = !props.store.prefersDarkMode}
+            />
+            : <Brightness7Icon style={{
+              cursor: 'pointer'
+            }} onClick={() => props.store.prefersDarkMode = !props.store.prefersDarkMode}
+            />
+          }
         </Toolbar>
 
       </AppBar>

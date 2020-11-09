@@ -1,8 +1,8 @@
 {
-  "name": "mocker",
-  "version": "1.1.0",
+  "name": "proxy-mock-server",
+  "version": "1.2.0",
   "author": "PeyTy",
-  "description": "An electron-react project",
+  "description": "An electron-based mock server and tunneling proxy",
   "license": "MIT",
   "main": "./dist/electron/main.js",
   "scripts": {
@@ -20,6 +20,9 @@
     "test": "yarn run test:unit && yarn run test:e2e",
     "test:unit": "jest -c jest.unit.config.js",
     "test:e2e": "yarn run pack && jest -c jest.e2e.config.js"
+  },
+  "bin": {
+    "proxy-mock-server": ".electron-react/dev-runner.js"
   },
   "build": {
     "productName": "mocker",
@@ -59,9 +62,11 @@
     "@babel/plugin-proposal-decorators": "^7.10.5",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@types/faker": "^5.1.4",
     "@types/mime-types": "^2.1.0",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
+    "faker": "^5.1.0",
     "mime-types": "^2.1.27",
     "mobx": "^5.15.7",
     "mobx-react": "^6.3.0",

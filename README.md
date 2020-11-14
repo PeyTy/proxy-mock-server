@@ -24,6 +24,7 @@
 
 - English
 - Русский
+- [Add yours...](https://github.com/PeyTy/proxy-mock-server/blob/dev/src/renderer/lang/languages.tsx)
 
 #### Run Locally
 

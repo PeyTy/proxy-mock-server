@@ -10,6 +10,7 @@ export interface ILanguage {
   'Import project': string
   'Start': string
   'Stop': string
+  'Wait': string
   'Delete': string
   'Hosted at': string
   'Search': string
@@ -24,15 +25,16 @@ export interface ILanguage {
   'Project title'?: string
   'Local port'?: string
   'Remote host for tunneling'?: string
-  'Remote port for tunneling(443 for HTTPS)'?: string
+  'Remote port for tunneling (443 for HTTPS)'?: string
   'Simulated response delay in milliseconds'?: string
 
-  'Tunnel first, re - route & mock only on 404'?: string
+  'Tunnel first, re-route & mock only on 404'?: string
   'Use HTTPS protocol for remote'?: string
   'Save tunneled files to htdocs'?: string
 
   'Start server'?: string
   'Stop server'?: string
+  'Please wait'?: string
   'Open htdocs folder'?: string
   'Open in browser'?: string
 }
@@ -45,6 +47,7 @@ export const en: ILanguage = {
   'Import project': 'Import project',
   'Start': 'Start',
   'Stop': 'Stop',
+  'Wait': 'Wait',
   'Delete': 'Delete',
   'Hosted at': 'Hosted at',
   'Search': 'Search',
@@ -62,9 +65,10 @@ export const ru: ILanguage = {
   'Start': 'Пуск',
   'Stop': 'Стоп',
   'Delete': 'Удалить',
+  'Wait': 'Ждём',
   'Hosted at': 'На порту',
   'Search': 'Искать по',
-  'Back to projects': 'Назад проектам',
+  'Back to projects': 'Назад к проектам',
   'Routes': 'Пути',
   'Log': 'События',
   'Project': 'Проект',

@@ -52,7 +52,7 @@ const App = observer(() => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {store.route === 'projects' && <Projects store={store} />}
+      {store.route === 'projects' && <Projects store={store} key={store.settings.language} />}
       {store.route === 'project' && <Project store={store} key={store.currentProject.uuid} backToProjects={backToProjects} />}
     </ThemeProvider>
   )

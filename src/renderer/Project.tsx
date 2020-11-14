@@ -124,7 +124,7 @@ const useStyles = makeStyles((theme: Theme) =>
       transition: theme.transitions.create('width'),
       width: '100%',
       [theme.breakpoints.up('sm')]: {
-        width: '12ch',
+        width: '16ch',
         '&:focus': {
           width: '20ch'
         }
@@ -185,6 +185,8 @@ export default observer((props: Props) => {
     }
   }
 
+  const text = store.text
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -211,14 +213,14 @@ export default observer((props: Props) => {
           &nbsp;
           &nbsp;
           <Button variant="contained" color="secondary" onClick={backToProjectList}>
-            Back to projects
+            {text('Back to projects')}
           </Button>
           {store.currentProject.swaggerJson && <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="Search REST…"
+              placeholder={text("Search") + " REST…"}
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput
@@ -248,12 +250,12 @@ export default observer((props: Props) => {
 
           <ListItem button key={'Project'} onClick={(): void => route('project')} selected={store.subroute === 'project'}>
             <ListItemIcon><Build /></ListItemIcon>
-            <ListItemText primary={'Project'} />
+            <ListItemText primary={text('Project')} />
           </ListItem>
 
           <ListItem button key={'Log'} onClick={(): void => route('log')} selected={store.subroute === 'log'}>
             <ListItemIcon><MailIcon /></ListItemIcon>
-            <ListItemText primary={'Log'} />
+            <ListItemText primary={text('Log')} />
           </ListItem>
 
           <ListItem button key={'Swagger'} title="Also known as OpenAPI" onClick={(): void => route('swagger')} selected={store.subroute === 'swagger'}>
@@ -263,7 +265,7 @@ export default observer((props: Props) => {
 
           <ListItem button key={'Routes'} onClick={(): void => route('routes')} selected={store.subroute === 'routes'}>
             <ListItemIcon><CallSplit /></ListItemIcon>
-            <ListItemText primary={'Routes'} />
+            <ListItemText primary={text('Routes')} />
           </ListItem>
 
         </List>
@@ -272,7 +274,7 @@ export default observer((props: Props) => {
 
           <ListItem button key={'Files'} onClick={(): void => route('files')} selected={store.subroute === 'files'}>
             <ListItemIcon><CreateNewFolder /></ListItemIcon>
-            <ListItemText primary={'Files'} />
+            <ListItemText primary={text('Files')} />
           </ListItem>
 
           {store.currentProject.swaggerJson && ownKeys(store.currentProject.swaggerJson.paths).map(pathKey => {

@@ -142,7 +142,7 @@ export default observer((props: { store: Store }) => {
     <TextField
       margin="dense"
       id="name"
-      label="Project title"
+      label={text("Project title")}
       type="text"
       fullWidth
       defaultValue={store.currentProject.title}
@@ -163,7 +163,7 @@ export default observer((props: { store: Store }) => {
       autoFocus
       margin="dense"
       id="name"
-      label="Remote host for tunneling"
+      label={text("Remote host for tunneling")}
       type="text"
       fullWidth
       defaultValue={store.currentProject.remote}
@@ -173,7 +173,7 @@ export default observer((props: { store: Store }) => {
     <TextField
       margin="dense"
       id="name"
-      label="Remote port for tunneling (443 for HTTPS)"
+      label={text("Remote port for tunneling (443 for HTTPS)")}
       type="text"
       fullWidth
       defaultValue={store.currentProject.remotePort}
@@ -183,7 +183,7 @@ export default observer((props: { store: Store }) => {
     <TextField
       margin="dense"
       id="name"
-      label="Simulated response delay in milliseconds"
+      label={text("Simulated response delay in milliseconds")}
       type="text"
       fullWidth
       defaultValue={'0'}
@@ -193,27 +193,27 @@ export default observer((props: { store: Store }) => {
     <div>
       <FormControlLabel
         control={<Checkbox checked={store.currentProject.tunnel404} onChange={handleChangeTunnel404} name="tunnel404" />}
-        label="Tunnel first, re-route & mock only on 404"
+        label={text("Tunnel first, re-route & mock only on 404")}
       />
       <FormControlLabel
         control={<Checkbox checked={store.currentProject.https} onChange={handleChangeHttps} name="https" />}
-        label="Use HTTPS protocol for remote"
+        label={text("Use HTTPS protocol for remote")}
       />
     </div>
     <div>
       <FormControlLabel
         control={<Checkbox checked={store.currentProject.tunnelSave} onChange={handleChangeTunnelSave} name="tunnelSave" />}
-        label="Save tunneled files to htdocs"
+        label={text("Save tunneled files to htdocs")}
       />
     </div>
     <div>
-      {store.currentProject.state === 'stopped' && <Button variant="contained" color="primary" onClick={startProject}>Start server</Button>}
-      {store.currentProject.state === 'works' && <Button variant="contained" color="secondary" onClick={stopProject}>Stop server</Button>}
-      {store.currentProject.state === 'busy' && <Button variant="contained" color="primary">Please wait</Button>}
+      {store.currentProject.state === 'stopped' && <Button variant="contained" color="primary" onClick={startProject}>{text("Start server")}</Button>}
+      {store.currentProject.state === 'works' && <Button variant="contained" color="secondary" onClick={stopProject}>{text("Stop server")}</Button>}
+      {store.currentProject.state === 'busy' && <Button variant="contained" color="primary">{text("Please wait")}</Button>}
       &nbsp;
-      <Button variant="contained" color="primary" onClick={openProjectFolder}>Open htdocs folder</Button>
+      <Button variant="contained" color="primary" onClick={openProjectFolder}>{text("Open htdocs folder")}</Button>
       &nbsp;
-      <Button variant="contained" color="primary" onClick={openBrowser}>Open in browser</Button>
+      <Button variant="contained" color="primary" onClick={openBrowser}>{text("Open in browser")}</Button>
     </div>
   </>
 })

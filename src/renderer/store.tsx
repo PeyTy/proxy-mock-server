@@ -386,7 +386,7 @@ export class Store {
     this.texts = languagesMap[this.settings.language] || en
   }
 
-  @action.bound text(key: string): string {
+  @action.bound text(key: keyof ILanguage): string {
     const result: string | null = (this.texts as any)[key]
 
     if (result == null) {

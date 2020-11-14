@@ -54,7 +54,7 @@ export const ProjectsGrid = observer((props: { store: Store }) => {
                   <Typography gutterBottom variant="h5" component="h2">
                     {project.title}
                   </Typography>
-                  <Typography component="p" color="primary">Hosted at :{project.port}</Typography>
+                  <Typography component="p" color="primary">{text('Hosted at')} :{project.port}</Typography>
                 </CardContent>
               </CardActionArea>
               <CardActions>
@@ -62,13 +62,13 @@ export const ProjectsGrid = observer((props: { store: Store }) => {
                   {text('Start')}
                 </Button>}
                 {project.state === 'works' && <Button size="small" color="primary" onClick={(): void => { stopProject(project) }}>
-                  Stop
+                  {text('Stop')}
                 </Button>}
                 {project.state === 'busy' && <Button size="small" color="primary" onClick={(): void => { /* No-op */ }}>
-                  Wait
+                  {text('Wait')}
                 </Button>}
                 <Button size="small" color="secondary" onClick={(): void => { deleteProject(project) }}>
-                  Delete
+                  {text('Delete')}
                 </Button>
               </CardActions>
             </Card>

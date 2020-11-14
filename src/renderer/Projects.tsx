@@ -83,6 +83,8 @@ export const Projects = observer((props: { store: Store }) => {
     store.loadTranslation()
   }
 
+  const text = store.text
+
   return (
     <>
       <AppBar color="primary" position="static">
@@ -90,18 +92,18 @@ export const Projects = observer((props: { store: Store }) => {
           <TypoGraphy variant="h6"
             color="inherit"
           >
-            Choose or create project to mock
+            {text('Choose or create project to mock')}
           </TypoGraphy>
            &nbsp;
            &nbsp;
            &nbsp;
           <Button variant="contained" color="secondary" onClick={newProjectModal}>
-            Create project
+            {text('Create project')}
           </Button>
            &nbsp;
            &nbsp;
           <Button variant="contained" color="secondary" onClick={importProject} title='Import mock-project.json'>
-            Import project
+            {text('Import project')}
           </Button>
            &nbsp;
            &nbsp;

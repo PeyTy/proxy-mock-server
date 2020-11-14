@@ -23,6 +23,7 @@
 ### Languages
 
 - English
+- Русский
 
 #### Run Locally
 

@@ -136,6 +136,8 @@ export default observer((props: { store: Store }) => {
     store.currentProject.save()
   }
 
+  const text = store.text
+
   return <>
     <TextField
       margin="dense"
@@ -150,7 +152,7 @@ export default observer((props: { store: Store }) => {
     <TextField
       margin="dense"
       id="name"
-      label="Local port"
+      label={text("Local port")}
       type="text"
       fullWidth
       defaultValue={store.currentProject.port}

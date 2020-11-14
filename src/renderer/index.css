@@ -21,10 +21,23 @@ input {
   cursor: text;
 }
 
-button * {
-  cursor: pointer;
+button, button *, [role=button], [role=button] * {
+  cursor: pointer !important;
 }
 
 .pointer, .pointer * {
   cursor: pointer;
+}
+
+.uppercase, .uppercase * {
+  text-transform: uppercase;
+}
+
+.selectFix > div > svg {
+  position: absolute;
+  top: 4px;
+}
+
+.selectFix > div > .uppercase {
+  margin-left: 30px;
 }

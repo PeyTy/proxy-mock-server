@@ -34,6 +34,9 @@ import * as path from 'path'
 import alert from './utils/alert'
 import Brightness7Icon from '@material-ui/icons/Brightness7'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
+import FlagIcon from '@material-ui/icons/Flag'
+import { Select, MenuItem } from '@material-ui/core'
+import { languagesList } from './lang/languages'
 
 const { dialog } = remote
 
@@ -74,6 +77,12 @@ export const Projects = observer((props: { store: Store }) => {
     store.settings.saveSettings(store.whereSettings)
   }
 
+  const handleChangeLanguage = (event: any) => {
+    store.settings.language = event.target.value.toString()
+    store.settings.saveSettings(store.whereSettings)
+    store.loadTranslation()
+  }
+
   return (
     <>
       <AppBar color="primary" position="static">
@@ -103,6 +112,21 @@ export const Projects = observer((props: { store: Store }) => {
             : <Brightness7Icon className="pointer" onClick={() => toggleDarkMode()}
             />
           }
+           &nbsp;
+           &nbsp;
+           &nbsp;
+          <span>
+            <Select
+              labelId="language-simple-select-label"
+              id="language-simple-select"
+              value={language}
+              onChange={handleChangeLanguage}
+              className="selectFix"
+              style={{ color: 'white' }}
+            >
+              {languagesList.map(language => <MenuItem value={language}><FlagIcon /> <span className="uppercase">{language}</span></MenuItem>)}
+            </Select>
+          </span>
         </Toolbar>
 
       </AppBar>

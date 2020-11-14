@@ -41,6 +41,8 @@ export const ProjectsGrid = observer((props: { store: Store }) => {
     store.serverFactory.stop(project)
   }
 
+  const text = store.text
+
   return (
     <div style={{ marginTop: 20, padding: 30 }}>
       <Grid container spacing={1} justify="center">
@@ -57,7 +59,7 @@ export const ProjectsGrid = observer((props: { store: Store }) => {
               </CardActionArea>
               <CardActions>
                 {project.state === 'stopped' && <Button size="small" color="primary" onClick={(): void => { startProject(project) }}>
-                  Start
+                  {text('Start')}
                 </Button>}
                 {project.state === 'works' && <Button size="small" color="primary" onClick={(): void => { stopProject(project) }}>
                   Stop

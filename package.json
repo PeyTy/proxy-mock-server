@@ -5,6 +5,12 @@
   "description": "An electron-based mock server and tunneling proxy",
   "license": "MIT",
   "main": "./dist/electron/main.js",
+  "keywords": [
+    "proxy",
+    "mock",
+    "server",
+    "electron"
+  ],
   "scripts": {
     "build": "node .electron-react/build.js && electron-builder",
     "build:dir": "node .electron-react/build.js && electron-builder --dir",

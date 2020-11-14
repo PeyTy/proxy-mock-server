@@ -2,7 +2,19 @@
 
 > An electron-based mock server & tunneling proxy
 
-[![proxy-mock-server](mocker.png?raw=true)](https://github.com/PeyTy/proxy-mock-server)
+[![proxy-mock-server](https://github.com/PeyTy/proxy-mock-server/raw/main/mocker.png?raw=true)](https://github.com/PeyTy/proxy-mock-server)
+
+#### Features
+
+- Crossplatform desktop GUI
+- Dark theme
+- Fake data with Swagger schemas
+- Proxy with on-demand mocking
+- Full AJAX support
+- Complex routing with regex expressions
+- File-based mocking
+- Save projects in independent repos, manage with single app
+- Use faker like `{{firstName}}` in JSON responses
 
 #### Features
 
@@ -19,21 +31,40 @@
 
 - [Демонстрация proxy-mock-server 1.0.0](https://youtu.be/Hb78LMeYqns)
 
-#### Build Setup
+### Languages
+
+- English
+- Русский
+- [Add yours...](https://github.com/PeyTy/proxy-mock-server/blob/dev/src/renderer/lang/languages.tsx)
+
+#### Run Locally
 
 ``` bash
+# clone this repo
+git clone --branch main --depth 1 https://github.com/PeyTy/proxy-mock-server.git
+
 # install dependencies
 yarn install
 
 # start app with hot reload & developer tools
 npm run dev
+```
+
+#### Create Installer
+
+``` bash
+# clone this repo
+git clone --branch main --depth 1 https://github.com/PeyTy/proxy-mock-server.git
+
+# install dependencies
+yarn install
 
 # build electron application for production
 npm run build
 # you will find installers at proxy-mock-server\build & portable at proxy-mock-server\build\win-unpacked
 ```
 
-### Install Globally
+### Install Globally (very experimental)
 
 ``` bash
 # install
@@ -41,6 +72,20 @@ npm i -g proxy-mock-server
 
 # run as
 proxy-mock-server
+```
+
+### Install Locally (very experimental)
+
+``` bash
+# install
+npm i --save-dev --also=dev proxy-mock-server
+npm i --save-dev electron@7.1.11 cfonts@2.5.1
+
+# run as
+.\node_modules\.bin\proxy-mock-server
+
+# or
+./node_modules/.bin/proxy-mock-server
 ```
 
 ## MIT License

@@ -34,13 +34,18 @@ import * as path from 'path'
 import alert from './utils/alert'
 import Brightness7Icon from '@material-ui/icons/Brightness7'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
+import FlagIcon from '@material-ui/icons/Flag'
+import { Select, MenuItem } from '@material-ui/core'
+import { languagesList } from './lang/languages'
 
 const { dialog } = remote
 
 export const Projects = observer((props: { store: Store }) => {
+  const { store } = props
+
   const newProjectModal = (): void => {
-    props.store.newProjectTitle = ''
-    props.store.newProjectModal = true
+    store.newProjectTitle = ''
+    store.newProjectModal = true
   }
 
   const electron = process.versions.electron
@@ -60,12 +65,25 @@ export const Projects = observer((props: { store: Store }) => {
         }
         // Handle file
         const storage = path.resolve(path.join(file, '..'))
-        props.store.importProject(storage)
+        store.importProject(storage)
       }
     })
   }
 
-  const { prefersDarkMode } = props.store
+  const { prefersDarkMode, language } = store.settings
+
+  const toggleDarkMode = (): void => {
+    store.settings.prefersDarkMode = !prefersDarkMode
+    store.settings.saveSettings(store.whereSettings)
+  }
+
+  const handleChangeLanguage = (event: any) => {
+    store.settings.language = event.target.value.toString()
+    store.settings.saveSettings(store.whereSettings)
+    store.loadTranslation()
+  }
+
+  const text = store.text
 
   return (
     <>
@@ -74,37 +92,48 @@ export const Projects = observer((props: { store: Store }) => {
           <TypoGraphy variant="h6"
             color="inherit"
           >
-            Choose or create project to mock
+            {text('Choose or create project to mock')}
           </TypoGraphy>
            &nbsp;
            &nbsp;
            &nbsp;
           <Button variant="contained" color="secondary" onClick={newProjectModal}>
-            Create project
+            {text('Create project')}
           </Button>
            &nbsp;
            &nbsp;
           <Button variant="contained" color="secondary" onClick={importProject} title='Import mock-project.json'>
-            Import project
+            {text('Import project')}
           </Button>
            &nbsp;
            &nbsp;
            &nbsp;
           {prefersDarkMode
-            ? <Brightness4Icon style={{
-              cursor: 'pointer'
-            }} onClick={() => props.store.prefersDarkMode = !props.store.prefersDarkMode}
+            ? <Brightness4Icon className="pointer" onClick={() => toggleDarkMode()}
             />
-            : <Brightness7Icon style={{
-              cursor: 'pointer'
-            }} onClick={() => props.store.prefersDarkMode = !props.store.prefersDarkMode}
+            : <Brightness7Icon className="pointer" onClick={() => toggleDarkMode()}
             />
           }
+           &nbsp;
+           &nbsp;
+           &nbsp;
+          <span>
+            <Select
+              labelId="language-simple-select-label"
+              id="language-simple-select"
+              value={language}
+              onChange={handleChangeLanguage}
+              className="selectFix"
+              style={{ color: 'white' }}
+            >
+              {languagesList.map(language => <MenuItem value={language}><FlagIcon /> <span className="uppercase">{language}</span></MenuItem>)}
+            </Select>
+          </span>
         </Toolbar>
 
       </AppBar>
-      <ProjectsGrid store={props.store} />
-      <ProjectModal store={props.store} />
+      <ProjectsGrid store={store} />
+      <ProjectModal store={store} />
       <div style={{
         width: '100wv',
         display: 'flex',

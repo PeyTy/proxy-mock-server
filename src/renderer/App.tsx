@@ -33,7 +33,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 const App = observer(() => {
   const [store] = useState(() => new Store())
 
-  const { prefersDarkMode } = store
+  const { prefersDarkMode } = store.settings
 
   const theme = React.useMemo(
     () =>
@@ -52,7 +52,7 @@ const App = observer(() => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {store.route === 'projects' && <Projects store={store} />}
+      {store.route === 'projects' && <Projects store={store} key={store.settings.language} />}
       {store.route === 'project' && <Project store={store} key={store.currentProject.uuid} backToProjects={backToProjects} />}
     </ThemeProvider>
   )

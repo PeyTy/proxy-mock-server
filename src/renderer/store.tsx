@@ -8,6 +8,8 @@ import { ownKeys } from './utils'
 import { Swagger, SwaggerPath, SwaggerPathMethod, SwaggerPathResponse, SwaggerPathResponseHeader, SwaggerDefinitions, SwaggerDefinition } from './utils/Swagger'
 import alert from './utils/alert'
 import confirm from './utils/confirm'
+import { ILanguage, en, Languages, languagesList, languagesMap } from './lang/languages'
+import { keys } from '@material-ui/core/styles/createBreakpoints'
 const { app } = remote
 
 export class IRoute {
@@ -297,21 +299,41 @@ export class IProject {
   }
 }
 
+export class ISettings {
+  @observable prefersDarkMode = false
+  @observable language: Languages = 'en'
+
+  constructor(settings: ISettings) {
+    this.prefersDarkMode = settings.prefersDarkMode == null ? false : settings.prefersDarkMode
+    this.language = settings.language == null ? window.navigator.language.split('-')[0].toLowerCase() as Languages : settings.language
+
+    if (!languagesList.includes(this.language)) {
+      this.language = 'en'
+    }
+  }
+
+  @action.bound saveSettings(where: string): void {
+    fs.writeFileSync(where, JSON.stringify(toJS(this), null, ' '))
+  }
+}
+
 export class Store {
   @observable route: 'projects' | 'project' = 'projects'
   @observable subroute: 'project' | 'log' | 'rest' | 'routes' | 'swagger' | 'files' = 'project'
   @observable rest = '?'
   @observable projects: IProject[] = []
   @observable projectList: string[] = []
+  @observable settings: ISettings
   readonly whereDir: string = path.join(app.getPath('appData'), 'com.github.peyty.mocker')
   readonly where: string = path.join(this.whereDir, 'project-list.json')
+  readonly whereSettings: string = path.join(this.whereDir, 'settings.json')
   @observable newProjectModal = false
   @observable newProjectTitle = ''
   @observable newProjectStorage = ''
   @observable deleteProjectModal: IProject | null = null
   @observable currentProject: IProject = null as unknown as IProject
   @observable serverFactory!: ServerFactory
-  @observable prefersDarkMode = true
+  @observable texts: ILanguage = en
 
   constructor() {
     // Upgrade 1.0.0 -> 1.1.0
@@ -330,6 +352,14 @@ export class Store {
       fs.writeFileSync(this.where, JSON.stringify(projectList, null, ' '))
       fs.unlinkSync(outdated)
     }
+    // Upgrade done
+
+    if (!fs.existsSync(this.whereSettings)) {
+      fs.writeFileSync(this.whereSettings, '{}')
+    }
+
+    this.settings = new ISettings(JSON.parse(fs.readFileSync(this.whereSettings).toString()))
+    this.loadTranslation()
 
     this.serverFactory = new ServerFactory()
 
@@ -350,6 +380,20 @@ export class Store {
         return new IProject({ ...json, storage }, this.whereDir)
       })
     )
+  }
+
+  @action.bound loadTranslation(): void {
+    this.texts = languagesMap[this.settings.language] || en
+  }
+
+  @action.bound text(key: keyof ILanguage): string {
+    const result: string | null = (this.texts as any)[key]
+
+    if (result == null) {
+      return key
+    }
+
+    return result
   }
 
   @action.bound deleteProject(uuid: string): void {

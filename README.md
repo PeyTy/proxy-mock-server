@@ -53,7 +53,7 @@ npm run build
 # you will find installers at proxy-mock-server\build & portable at proxy-mock-server\build\win-unpacked
 ```
 
-### Install Globally
+### Install Globally (experimental)
 
 ``` bash
 # install
@@ -61,6 +61,19 @@ npm i -g proxy-mock-server
 
 # run as
 proxy-mock-server
+```
+
+### Install Locally (experimental)
+
+``` bash
+# install
+npm i proxy-mock-server
+
+# run as
+.\node_modules\.bin\proxy-mock-server
+
+# or
+./node_modules/.bin/proxy-mock-server
 ```
 
 ## MIT License

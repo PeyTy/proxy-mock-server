@@ -16,6 +16,17 @@
 - Save projects in independent repos, manage with single app
 - Use faker like `{{firstName}}` in JSON responses
 
+#### Features
+
+- Crossplatform desktop GUI
+- Fake data with Swagger schemas
+- Proxy with on-demand mocking
+- Full AJAX support
+- Complex routing with regex expressions
+- File-based mocking
+- Save projects in independent repos, manage with single app
+- Use faker like `{{firstName}}` in JSON responses
+
 ### YouTube
 
 - [Демонстрация proxy-mock-server 1.0.0](https://youtu.be/Hb78LMeYqns)

@@ -7,6 +7,7 @@
 #### Features
 
 - Crossplatform desktop GUI
+- Dark theme
 - Fake data with Swagger schemas
 - Proxy with on-demand mocking
 - Full AJAX support

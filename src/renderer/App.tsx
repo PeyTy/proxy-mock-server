@@ -33,7 +33,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 const App = observer(() => {
   const [store] = useState(() => new Store())
 
-  const { prefersDarkMode } = store
+  const { prefersDarkMode } = store.settings
 
   const theme = React.useMemo(
     () =>

@@ -24,3 +24,7 @@ input {
 button * {
   cursor: pointer;
 }
+
+.pointer, .pointer * {
+  cursor: pointer;
+}

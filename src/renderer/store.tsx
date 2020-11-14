@@ -297,21 +297,34 @@ export class IProject {
   }
 }
 
+export class ISettings {
+  @observable prefersDarkMode = false
+
+  constructor(settings: ISettings) {
+    this.prefersDarkMode = settings.prefersDarkMode == null ? false : settings.prefersDarkMode
+  }
+
+  @action.bound saveSettings(where: string): void {
+    fs.writeFileSync(where, JSON.stringify(toJS(this), null, ' '))
+  }
+}
+
 export class Store {
   @observable route: 'projects' | 'project' = 'projects'
   @observable subroute: 'project' | 'log' | 'rest' | 'routes' | 'swagger' | 'files' = 'project'
   @observable rest = '?'
   @observable projects: IProject[] = []
   @observable projectList: string[] = []
+  @observable settings: ISettings
   readonly whereDir: string = path.join(app.getPath('appData'), 'com.github.peyty.mocker')
   readonly where: string = path.join(this.whereDir, 'project-list.json')
+  readonly whereSettings: string = path.join(this.whereDir, 'settings.json')
   @observable newProjectModal = false
   @observable newProjectTitle = ''
   @observable newProjectStorage = ''
   @observable deleteProjectModal: IProject | null = null
   @observable currentProject: IProject = null as unknown as IProject
   @observable serverFactory!: ServerFactory
-  @observable prefersDarkMode = true
 
   constructor() {
     // Upgrade 1.0.0 -> 1.1.0
@@ -330,6 +343,13 @@ export class Store {
       fs.writeFileSync(this.where, JSON.stringify(projectList, null, ' '))
       fs.unlinkSync(outdated)
     }
+    // Upgrade done
+
+    if (!fs.existsSync(this.whereSettings)) {
+      fs.writeFileSync(this.whereSettings, '{}')
+    }
+
+    this.settings = new ISettings(JSON.parse(fs.readFileSync(this.whereSettings).toString()))
 
     this.serverFactory = new ServerFactory()
 

@@ -38,9 +38,11 @@ import Brightness4Icon from '@material-ui/icons/Brightness4'
 const { dialog } = remote
 
 export const Projects = observer((props: { store: Store }) => {
+  const { store } = props
+
   const newProjectModal = (): void => {
-    props.store.newProjectTitle = ''
-    props.store.newProjectModal = true
+    store.newProjectTitle = ''
+    store.newProjectModal = true
   }
 
   const electron = process.versions.electron
@@ -60,12 +62,17 @@ export const Projects = observer((props: { store: Store }) => {
         }
         // Handle file
         const storage = path.resolve(path.join(file, '..'))
-        props.store.importProject(storage)
+        store.importProject(storage)
       }
     })
   }
 
-  const { prefersDarkMode } = props.store
+  const { prefersDarkMode, language } = store.settings
+
+  const toggleDarkMode = (): void => {
+    store.settings.prefersDarkMode = !prefersDarkMode
+    store.settings.saveSettings(store.whereSettings)
+  }
 
   return (
     <>
@@ -91,20 +98,16 @@ export const Projects = observer((props: { store: Store }) => {
            &nbsp;
            &nbsp;
           {prefersDarkMode
-            ? <Brightness4Icon style={{
-              cursor: 'pointer'
-            }} onClick={() => props.store.prefersDarkMode = !props.store.prefersDarkMode}
+            ? <Brightness4Icon className="pointer" onClick={() => toggleDarkMode()}
             />
-            : <Brightness7Icon style={{
-              cursor: 'pointer'
-            }} onClick={() => props.store.prefersDarkMode = !props.store.prefersDarkMode}
+            : <Brightness7Icon className="pointer" onClick={() => toggleDarkMode()}
             />
           }
         </Toolbar>
 
       </AppBar>
-      <ProjectsGrid store={props.store} />
-      <ProjectModal store={props.store} />
+      <ProjectsGrid store={store} />
+      <ProjectModal store={store} />
       <div style={{
         width: '100wv',
         display: 'flex',

@@ -20,14 +20,31 @@
 
 - [Демонстрация proxy-mock-server 1.0.0](https://youtu.be/Hb78LMeYqns)
 
-#### Build Setup
+### Languages
+
+- English
+
+#### Run Locally
 
 ``` bash
+# clone this repo
+git clone --branch main --depth 1 https://github.com/PeyTy/proxy-mock-server.git
+
 # install dependencies
 yarn install
 
 # start app with hot reload & developer tools
 npm run dev
+```
+
+#### Create Installer
+
+``` bash
+# clone this repo
+git clone --branch main --depth 1 https://github.com/PeyTy/proxy-mock-server.git
+
+# install dependencies
+yarn install
 
 # build electron application for production
 npm run build

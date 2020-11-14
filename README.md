@@ -53,7 +53,7 @@ npm run build
 # you will find installers at proxy-mock-server\build & portable at proxy-mock-server\build\win-unpacked
 ```
 
-### Install Globally (experimental)
+### Install Globally (very experimental)
 
 ``` bash
 # install
@@ -63,11 +63,12 @@ npm i -g proxy-mock-server
 proxy-mock-server
 ```
 
-### Install Locally (experimental)
+### Install Locally (very experimental)
 
 ``` bash
 # install
 npm i --save-dev --also=dev proxy-mock-server
+npm i --save-dev electron@7.1.11 cfonts@2.5.1
 
 # run as
 .\node_modules\.bin\proxy-mock-server

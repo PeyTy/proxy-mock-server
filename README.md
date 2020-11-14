@@ -67,7 +67,7 @@ proxy-mock-server
 
 ``` bash
 # install
-npm i proxy-mock-server
+npm i --save-dev --also=dev proxy-mock-server
 
 # run as
 .\node_modules\.bin\proxy-mock-server
